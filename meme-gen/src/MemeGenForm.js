@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const MemeGenForm = () => {
   const FORM_STATE = {
+    id: uuidv4(),
     url: "",
     top: "",
     bttm: "",
   };
 
   const [formData, setFormData] = useState(FORM_STATE);
+  const dispatch = useDispatch();
+  const add = () => dispatch({ type: "ADD", payload: formData });
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -21,6 +25,7 @@ const MemeGenForm = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setFormData(formData);
+    add();
     setFormData(FORM_STATE);
     console.log("MEME DATA", formData);
   };
@@ -31,6 +36,7 @@ const MemeGenForm = () => {
         onSubmit={handleSubmit}
         className="flex flex-col w-96 justify-center align-items"
       >
+        <input type="hidden" name="id" value={formData.id} />
         <input
           type="text"
           name="url"

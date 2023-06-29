@@ -1,11 +1,11 @@
 import MemeGenForm from "./MemeGenForm";
+import MemeListContainer from "./MemeList";
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <MemeGenForm />
-      </div>
+      <MemeGenForm />
+      <MemeListContainer />
     </div>
   );
 }
